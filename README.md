@@ -27,35 +27,36 @@ JavaScript-style-guide
 	+ 变量名使用名词，函数名使用动词
 	
 	    ```javascript
-    // bad
-    var getCount = 10;
+	 // bad
+	  var getCount = 10;
     
-    function theName() {
-    }
+	  function theName() {
+	  }
 
-    // good
-    var count = 10;
- 	function getName() {
- 	}
-    ```
+	 // good
+	 var count = 10;
+ 	 function getName() {
+ 	 }
+	  ```
     
     + 常量全部大写。
     + 构造函数遵循大驼峰命名规范，首字母大写。
     
 - **直接量**
+ 
 	+ 字符串使用双引号。多行字符串使用“+”号连接。
 	
 	 ```javascript
 	// bad
 	var longString = "Here's the story, of a man \
 			named Brady";
-	
 	//good
 	var longString = "Here's the story, of a man " + 
 			"named Brady";
 	```
 	
 	+ null，不要和undefined混淆。将null理解为一个对象的占位符。
+	
 		+ 用来初始化变量，变量可能赋值为一个对象。
 		+ 用来和一个已经初始化的变量比较。
 		+ 当函数的参数期望是对象时，作为参数传入。
@@ -69,11 +70,10 @@ JavaScript-style-guide
 	var person;
 	if(person != null) {
 	}
-	
 	//bad 
 	function doSomething(arg1, arg2, arg3) {
-		if(arg4 != null) {
-		}
+			if(arg4 != null) {
+			}
 	}
 	```
 	
@@ -81,87 +81,80 @@ JavaScript-style-guide
 	
 		+ 使用直接量创建对象。
 		
-		```javascript
+			```javascript
+	
+			// bad
+	
+			var item = new Object();
 
-		// bad
+			// good
 
-		var item = new Object();
-
-		// good
-
-		var item = {};
-		```
+			var item = {};
+			```
 		
 		+ 不要使用保留字 [reserved words](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Reserved_Words) 作为键
 
-    ```javascript
-    // bad
-    var superman = {
-      class: 'superhero',
-      default: { clark: 'kent' },
-      private: true
-    };
-
-    // good
-    var superman = {
-      klass: 'superhero',
-      defaults: { clark: 'kent' },
-      hidden: true
-    };
-    ```
+		    ```javascript
+		    // bad
+		   var superman = {
+		      class: 'superhero',
+		     default: { clark: 'kent' },
+		     private: true
+		    };
+		    // good
+		    var superman = {
+		     klass: 'superhero',
+		     defaults: { clark: 'kent' },
+		      hidden: true
+		    };
+		    ```
     
  
-  + 数组直接量
+	+ 数组直接量
     
-   	  - 使用字面值创建数组
+   		 - 使用字面值创建数组
 
-    ```javascript
-    // bad
-    var items = new Array();
+		  ```javascript
+		    // bad
+		    var items = new Array();
+		   // good
+	            var items = [];
+    		  ```
 
-    // good
-    var items = [];
-    ```
+  	 	- 如果你不知道数组的长度，使用push
 
-  	 - 如果你不知道数组的长度，使用push
+		 ```javascript
+		  var someStack = [];
+		  // bad
+		 someStack[someStack.length] = 'abracadabra';
+		 // good
+		 someStack.push('abracadabra');
+		  ```
 
-    ```javascript
-    var someStack = [];
+ 		- 当你需要拷贝数组时使用slice. [jsPerf](http://jsperf.com/converting-arguments-to-an-array/7)
 
-
-    // bad
-    someStack[someStack.length] = 'abracadabra';
-
-    // good
-    someStack.push('abracadabra');
-    ```
-
- 		 - 当你需要拷贝数组时使用slice. [jsPerf](http://jsperf.com/converting-arguments-to-an-array/7)
-
-    ```javascript
-    var len = items.length,
-        itemsCopy = [],
-        i;
-
-    // bad
-    for (i = 0; i < len; i++) {
-      itemsCopy[i] = items[i];
-    }
-
-    // good
-    itemsCopy = items.slice();
-    ```
+		  ```javascript
+		  var len = items.length,
+		    itemsCopy = [],
+		    i;
+		// bad
+		for (i = 0; i < len; i++) {
+		  itemsCopy[i] = items[i];
+    		}
+		// good
+		  itemsCopy = items.slice();
+		  ```
 
   		- 使用slice将类数组的对象转成数组.
 
-    ```javascript
-    function trigger() {
-      var args = Array.prototype.slice.call(arguments);
-      ...
-    }
-    ```
+		 ```javascript
+		 function trigger() {
+		   var args = Array.prototype.slice.call(arguments);
+		   ...
+		 }
+		 ```
 
-    **[[⬆]](#TOC)**
+	 **[[⬆]](#TOC)**
     
 ## <a name='comments'>注释</a>
 
