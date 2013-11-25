@@ -6,7 +6,7 @@ JavaScript-style-guide
 ## <a name='TOC'>内容列表</a>
 1. [基本格式化](#basic)
 2. [注释](#comments)
-3. [语句和表达式](#)
+3. [语句和表达式](#statement)
 
 
 ## <a name='basic'>基本格式化</a>
@@ -244,6 +244,37 @@ JavaScript-style-guide
   ```
 
     **[[⬆]](#TOC)**
-	
+## <a name='statement'>语句和表达式</a>
+  - 所有的块语句都需要使用花括号，包括：
+  	+ if
+  	+ for
+  	+ while
+  	+ do...while...
+  	+ try..catch...
+  - 花括号的对齐方式
+  
+    ```javascript
+	if (condition) {
+	    doSomething();
+	} else {
+	    doSomethingElse()	;
+	}
+    ```	
 
+  - 在左圆括号之前和右圆括号之后各添加一个空格。
+  - switch 语句,每条case相对于switch关键字缩进一层，每个case语句之间有一个空行。
+  ```javascript
+  switch(condition) {
+	case: "firset":
+		//code
+		break;
+
+	case: "second":
+		//code
+		break;
+	
+	default:
+		//code
+  }
+	```
 
