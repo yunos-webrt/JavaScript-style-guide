@@ -3,13 +3,14 @@ JavaScript-style-guide
 
 # JavaScript规范
 
-## <a name='TOC'>内容列表</a>
+## <a name="TOC">内容列表</a>
 1. [基本格式化](#basic)
 2. [注释](#comments)
 3. [语句和表达式](#statement)
+4. [变量、函数和运算符](#function)
 
 
-## <a name='basic'>基本格式化</a>
+## <a name="basic">基本格式化</a>
 - **缩进**
 	+ 所有的缩进都使用四空格。（可以对编辑器设置为tab即为四空格）
 	
@@ -97,15 +98,15 @@ JavaScript-style-guide
 		    ```javascript
 		    // bad
 		   var superman = {
-		      class: 'superhero',
-		     default: { clark: 'kent' },
-		     private: true
+		        class: "superhero",
+		        default: { clark: "kent" },
+		        private: true
 		    };
 		    // good
 		    var superman = {
-		     klass: 'superhero',
-		     defaults: { clark: 'kent' },
-		      hidden: true
+		        klass: "superhero",
+		        defaults: { clark: "kent" },
+		        hidden: true
 		    };
 		    ```
     
@@ -126,9 +127,9 @@ JavaScript-style-guide
 		 ```javascript
 		  var someStack = [];
 		  // bad
-		  someStack[someStack.length] = 'abracadabra';
+		  someStack[someStack.length] = "abracadabra";
 		  // good
-		  someStack.push('abracadabra');
+		  someStack.push("abracadabra");
 		  ```
 
  		- 当你需要拷贝数组时使用slice. [jsPerf](http://jsperf.com/converting-arguments-to-an-array/7)
@@ -156,7 +157,7 @@ JavaScript-style-guide
 
 	 **[[⬆]](#TOC)**
     
-## <a name='comments'>注释</a>
+## <a name="comments">注释</a>
   - 对于难以理解的代码必须加上注释。对于可能被误认为错误的代码必须加上注释。
 
   - 使用 `/** ... */` 进行多行注释，包括描述，指定类型以及参数值和返回值
@@ -203,19 +204,19 @@ JavaScript-style-guide
 
     // bad
     function getType() {
-      console.log('fetching type...');
-      // set the default type to 'no type'
-      var type = this._type || 'no type';
+      console.log("fetching type...");
+      // set the default type to "no type"
+      var type = this._type || "no type";
 
       return type;
     }
 
     // good
     function getType() {
-      console.log('fetching type...');
+      console.log("fetching type...");
 
-      // set the default type to 'no type'
-      var type = this._type || 'no type';
+      // set the default type to "no type"
+      var type = this._type || "no type";
 
       return type;
     }
@@ -244,7 +245,7 @@ JavaScript-style-guide
   ```
 
     **[[⬆]](#TOC)**
-## <a name='statement'>语句和表达式</a>
+## <a name="statement">语句和表达式</a>
   - 所有的块语句都需要使用花括号，包括：
   	+ if
   	+ for
@@ -277,4 +278,308 @@ JavaScript-style-guide
 		//code
   }
 	```
+  - 在做长方法链时使用缩进.
 
+    ```javascript
+    // bad
+    $("#items").find(".selected").highlight().end().find(".open").updateCount();
+
+    // good
+    $("#items")
+      .find(".selected")
+        .highlight()
+        .end()
+      .find(".open")
+        .updateCount();
+
+    // bad
+    var leds = stage.selectAll(".led").data(data).enter().append("svg:svg").class("led", true)
+        .attr("width",  (radius + margin) * 2).append("svg:g")
+        .attr("transform", "translate(" + (radius + margin) + "," + (radius + margin) + ")")
+        .call(tron.led);
+
+    // good
+    var leds = stage.selectAll(".led")
+        .data(data)
+      .enter().append("svg:svg")
+        .class("led", true)
+        .attr("width",  (radius + margin) * 2)
+      .append("svg:g")
+        .attr("transform", "translate(" + (radius + margin) + "," + (radius + margin) + ")")
+        .call(tron.led);
+    ```
+
+  - 不要将逗号放前面
+
+    ```javascript
+    // bad
+    var once
+      , upon
+      , aTime;
+
+    // good
+    var once,
+        upon,
+        aTime;
+
+    // bad
+    var hero = {
+        firstName: "Bob"
+      , lastName: "Parr"
+      , heroName: "Mr. Incredible"
+      , superPower: "strength"
+    };
+
+    // good
+    var hero = {
+      firstName: "Bob",
+      lastName: "Parr",
+      heroName: "Mr. Incredible",
+      superPower: "strength"
+    };
+    ```
+
+  - 不要加多余的逗号，这可能会在IE下引起错误，同时如果多一个逗号某些ES3的实现会计算多数组的长度。
+
+    ```javascript
+    // bad
+    var hero = {
+      firstName: "Kevin",
+      lastName: "Flynn",
+    };
+
+    var heroes = [
+      "Batman",
+      "Superman",
+    ];
+
+    // good
+    var hero = {
+      firstName: "Kevin",
+      lastName: "Flynn"
+    };
+
+    var heroes = [
+      "Batman",
+      "Superman"
+    ];
+    ```
+      **[[⬆]](#TOC)**
+## <a name="function">变量、函数和运算符</a>
+
+- 变量
+
+  - 总是使用 `var` 来声明变量，如果不这么做将导致产生全局变量，我们要避免污染全局命名空间。
+
+    ```javascript
+    // bad
+    superPower = new SuperPower();
+
+    // good
+    var superPower = new SuperPower();
+    ```
+
+  - 使用一个 `var` 以及新行声明多个变量，缩进4个空格。
+
+    ```javascript
+    // bad
+    var items = getItems();
+    var goSportsTeam = true;
+    var dragonball = "z";
+
+    // good
+    var items = getItems(),
+        goSportsTeam = true,
+        dragonball = "z";
+    ```
+
+  - 最后再声明未赋值的变量，当以后你想给一个依赖之前已赋值变量的变量时很有用。
+
+    ```javascript
+    // bad
+    var i, len, dragonball,
+        items = getItems(),
+        goSportsTeam = true;
+
+    // bad
+    var i, items = getItems(),
+        dragonball,
+        goSportsTeam = true,
+        len;
+
+    // good
+    var items = getItems(),
+        goSportsTeam = true,
+        dragonball,
+        length,
+        i;
+    ```
+
+  - 在作用域顶部声明变量，避免变量声明和赋值引起的相关问题。
+
+    ```javascript
+    // bad
+    function() {
+      test();
+      console.log("doing stuff..");
+
+      //..other stuff..
+
+      var name = getName();
+
+      if (name === "test") {
+        return false;
+      }
+
+      return name;
+    }
+
+    // good
+    function() {
+      var name = getName();
+
+      test();
+      console.log("doing stuff..");
+
+      //..other stuff..
+
+      if (name === "test") {
+        return false;
+      }
+
+      return name;
+    }
+
+    // bad
+    function() {
+      var name = getName();
+
+      if (!arguments.length) {
+        return false;
+      }
+
+      return true;
+    }
+
+    // good
+    function() {
+      if (!arguments.length) {
+        return false;
+      }
+
+      var name = getName();
+
+      return true;
+    }
+    ```
+- 函数
+
+ - 函数表达式:
+
+    ```javascript
+    // 匿名函数表达式
+    var anonymous = function() {
+      return true;
+    };
+
+    // 有名函数表达式
+    var named = function named() {
+      return true;
+    };
+
+    // 立即调用函数表达式
+    (function() {
+      console.log("Welcome to the Internet. Please follow me.");
+    })();
+    ```
+
+  - 绝对不要在一个非函数块里声明一个函数，把那个函数赋给一个变量。浏览器允许你这么做，但是它们解析不同。
+  - **注:** ECMA-262定义把`块`定义为一组语句，函数声明不是一个语句。[阅读ECMA-262对这个问题的说明](http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf#page=97).
+
+    ```javascript
+    // bad
+    if (currentUser) {
+      function test() {
+        console.log("Nope.");
+      }
+    }
+
+    // good
+    if (currentUser) {
+      var test = function test() {
+        console.log("Yup.");
+      };
+    }
+    ```
+
+  - 绝对不要把参数命名为 `arguments`, 这将会逾越函数作用域内传过来的 `arguments` 对象.
+
+    ```javascript
+    // bad
+    function nope(name, options, arguments) {
+      // ...stuff...
+    }
+
+    // good
+    function yup(name, options, args) {
+      // ...stuff...
+    }
+    ```
+- 属性
+  - 当使用变量访问属性时使用中括号.
+
+    ```javascript
+    var luke = {
+      jedi: true,
+      age: 28
+    };
+
+    function getProp(prop) {
+      return luke[prop];
+    }
+
+    var isJedi = getProp("jedi");
+    ```
+- 符号
+ - 使用 `===` 和 `!==` ，而不是 `==` 和 `!=`.
+ - 条件表达式的强制类型转换遵循以下规则：
+
+    + **对象** 被计算为 **true**
+    + **Undefined** 被计算为 **false**
+    + **Null** 被计算为 **false**
+    + **布尔值** 被计算为 **布尔的值**
+    + **数字** 如果是 **+0, -0, or NaN** 被计算为 **false** , 否则为 **true**
+    + **字符串** 如果是空字符串 `""` 则被计算为 **false**, 否则为 **true**
+
+    ```javascript
+    if ([0]) {
+      // true
+      // An array is an object, objects evaluate to true
+    }
+    ```
+
+  - 使用快捷方式.
+
+    ```javascript
+    // bad
+    if (name !== "") {
+      // ...stuff...
+    }
+
+    // good
+    if (name) {
+      // ...stuff...
+    }
+
+    // bad
+    if (collection.length > 0) {
+      // ...stuff...
+    }
+
+    // good
+    if (collection.length) {
+      // ...stuff...
+    }
+    ```
+    
+    [[⬆]](#TOC)**
