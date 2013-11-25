@@ -29,21 +29,58 @@ JavaScript-style-guide
 	+ 驼峰命名，首字母小写，后续每个单词首字母大写。
 	+ 变量名使用名词，函数名使用动词
 	
-	    ```javascript
-	 // bad
-	  var getCount = 10;
+        ```javascript
+        // bad
+        var getCount = 10;
     
-	  function theName() {
-	  }
+        function theName() {
+        }
 
-	 // good
-	 var count = 10;
- 	 function getName() {
- 	 }
-	  ```
+        // good
+        var count = 10;
+        function getName() {
+        }
+        ```
     
     + 常量全部大写。
     + 构造函数遵循大驼峰命名规范，首字母大写。
+    + 命名私有属性时前面加个下划线 `_`
+
+        ```javascript
+        // bad
+        this.__firstName__ = 'Panda';
+        this.firstName_ = 'Panda';
+
+        // good
+        this._firstName = 'Panda';
+        ```
+    + 当保存对 `this` 的引用时使用 `_this`.
+
+        ```javascript
+        // bad
+        function() {
+        var self = this;
+          return function() {
+            console.log(self);
+            };
+        }
+
+        // bad
+        function() {
+            var that = this;
+            return function() {
+            console.log(that);
+            };
+        }
+
+        // good
+        function() {
+        var _this = this;
+        return function() {
+            console.log(_this);
+            };
+        }
+        ```
     
 - **直接量**
  
@@ -582,4 +619,4 @@ JavaScript-style-guide
     }
     ```
     
-    [[⬆]](#TOC)**
+    **[[⬆]](#TOC)**
