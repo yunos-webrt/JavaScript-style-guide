@@ -5,6 +5,8 @@ JavaScript-style-guide
 
 ## <a name='TOC'>内容列表</a>
 1. [基本格式化](#basic)
+2. [注释](#comments)
+3. [语句和表达式](#)
 
 
 ## <a name='basic'>基本格式化</a>
@@ -84,11 +86,9 @@ JavaScript-style-guide
 			```javascript
 	
 			// bad
-	
 			var item = new Object();
 
 			// good
-
 			var item = {};
 			```
 		
@@ -117,7 +117,7 @@ JavaScript-style-guide
 		  ```javascript
 		    // bad
 		    var items = new Array();
-		   // good
+		    // good
 	            var items = [];
     		  ```
 
@@ -126,9 +126,9 @@ JavaScript-style-guide
 		 ```javascript
 		  var someStack = [];
 		  // bad
-		 someStack[someStack.length] = 'abracadabra';
-		 // good
-		 someStack.push('abracadabra');
+		  someStack[someStack.length] = 'abracadabra';
+		  // good
+		  someStack.push('abracadabra');
 		  ```
 
  		- 当你需要拷贝数组时使用slice. [jsPerf](http://jsperf.com/converting-arguments-to-an-array/7)
@@ -137,12 +137,12 @@ JavaScript-style-guide
 		  var len = items.length,
 		    itemsCopy = [],
 		    i;
-		// bad
-		for (i = 0; i < len; i++) {
-		  itemsCopy[i] = items[i];
-    		}
-		// good
-		  itemsCopy = items.slice();
+		   // bad
+		  for (i = 0; i < len; i++) {
+		    itemsCopy[i] = items[i];
+    	          }
+		  // good
+		    itemsCopy = items.slice();
 		  ```
 
   		- 使用slice将类数组的对象转成数组.
@@ -157,6 +157,7 @@ JavaScript-style-guide
 	 **[[⬆]](#TOC)**
     
 ## <a name='comments'>注释</a>
+  - 对于难以理解的代码必须加上注释。对于可能被误认为错误的代码必须加上注释。
 
   - 使用 `/** ... */` 进行多行注释，包括描述，指定类型以及参数值和返回值
 
