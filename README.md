@@ -1,6 +1,3 @@
-JavaScript-style-guide
-======================
-
 # JavaScript规范
 
 ## <a name="TOC">内容列表</a>
