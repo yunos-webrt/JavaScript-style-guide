@@ -147,14 +147,14 @@
  
 	+ 数组直接量
     
-   		 - 使用字面值创建数组
+   		- 使用字面值创建数组
 
-		  ```javascript
+		    ```javascript
 		    // bad
 		    var items = new Array();
 		    // good
-	            var items = [];
-    		  ```
+		   var items = [];
+	           ```
 
   	 	- 如果你不知道数组的长度，使用push
 
